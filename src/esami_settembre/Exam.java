@@ -83,6 +83,8 @@ public class Exam {
     }
     
     public boolean isCompatible(Exam e){
+        if (this.getTeacher().equals(e.getTeacher()))
+            return true;
         if( !this.name.getName().equals(e.name.getName()))
             return true;
         ArrayList <String> l = new ArrayList<>(students);
