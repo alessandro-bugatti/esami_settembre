@@ -113,12 +113,12 @@ public class Course {
         return null;          
     }
     
-    public void addExam(String examName, String student)
+    public void addExam(String examName, String student, String teacher)
     {
         if(alreadyInserted(examName))
             getExamBySubject(examName).addStudent(student);
         else{
-            Exam e  = new Exam(this);
+            Exam e  = new Exam(this, teacher);
             e.setSubject(examName);
             e.addStudent(student);
             exams.add(e);

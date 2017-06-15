@@ -91,10 +91,16 @@ public class Esami_settembre {
         }
         for (String classe : importedData.keySet()){
             Course c = new Course(classe);
-            for ( String[] line:importedData.get(classe))
-            {
-                c.addExam(line[3], line[1] + " " + line[2]);
+            try{
+                for ( String[] line:importedData.get(classe))
+                {
+                    c.addExam(line[3], line[1] + " " + line[2], line[5]);
+                }
             }
+            catch(Exception ex){
+                Logger.getLogger(Esami_settembre.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             classes.add(c);
         }
         
@@ -120,7 +126,7 @@ public class Esami_settembre {
         //System.out.println(days[0].getSession(0));
         classes = new ArrayList<>();
         try {
-            loadData("prove2016.csv");
+            loadData("prove2016completo.csv");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Esami_settembre.class.getName()).log(Level.SEVERE, null, ex);
         }

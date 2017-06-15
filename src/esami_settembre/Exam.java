@@ -33,13 +33,16 @@ import java.util.Random;
 public class Exam {
     private Course name;
     private String subject;
+    private String teacher;
     private ArrayList <String> students;
     private boolean accomodated = false;
-    
-    public Exam(Course className){
+
+
+    public Exam(Course className, String teacher){
         Random r = new Random();
         this.name  = className;
         this.students = new ArrayList<>();
+        this.teacher = teacher;
    }
 
     public boolean isAccomodated() {
@@ -67,6 +70,10 @@ public class Exam {
         this.subject = subject;
     }
 
+    public String getTeacher() {
+        return teacher;
+    }
+        
     public ArrayList<String> getStudents() {
         return students;
     }
