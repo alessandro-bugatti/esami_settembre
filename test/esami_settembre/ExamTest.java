@@ -85,6 +85,27 @@ public class ExamTest {
     }
     
     /**
+     * Test of isCompatible method, of class Exam.
+     */
+    @Test
+    public void testIsCompatibleSameTeacher() {
+        System.out.println("isCompatibleSameTeacher");
+        Exam e = new Exam(new Course("3AI"), "Bugatti");
+        e.addStudent("Piero");
+        e.addStudent("Geppo");
+        e.addStudent("Plino");
+        e.addStudent("Anna");
+        Exam instance = new Exam(new Course("4AI"),"Bugatti");
+        instance.addStudent("Geppo");
+        instance.addStudent("Vecchio");
+        instance.addStudent("Morfino");
+        boolean expResult = true;
+        boolean result = instance.isCompatible(e);
+        assertEquals(expResult, result);
+        
+    }
+    
+    /**
      * Test of toString method, of class Exam.
      */
     @Test
