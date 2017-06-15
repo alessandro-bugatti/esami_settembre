@@ -47,7 +47,7 @@ public class SessionTest {
     public void testAddExamFirst() {
         System.out.println("addExam first element");
         Session s = new Session(2);
-        Exam e = new Exam(new Course("3AI"));
+        Exam e = new Exam(new Course("3AI"),"Tognini");
          e.addStudent("Piero");
         e.addStudent("Geppo");
         e.addStudent("Plino");
@@ -66,14 +66,14 @@ public class SessionTest {
     public void testAddExamDifferentClasses() {
         System.out.println("addExam different classes");
         Session s = new Session(2);
-        Exam e = new Exam(new Course("3AI"));
+        Exam e = new Exam(new Course("3AI"),"Tognini");
         e.setSubject("Chimica");
          e.addStudent("Piero");
         e.addStudent("Geppo");
         e.addStudent("Plino");
         e.addStudent("Anna");
         s.addExam(e);
-        Exam second = new Exam(new Course("4AI"));
+        Exam second = new Exam(new Course("4AI"),"Bugatti");
         second.addStudent("Piero");
         second.addStudent("Geppo");
         second.addStudent("Plino");
@@ -91,14 +91,14 @@ public class SessionTest {
     public void testAddExamDifferentStudent() {
         System.out.println("addExam different students");
         Session s = new Session(2);
-        Exam e = new Exam(new Course("3AI"));
+        Exam e = new Exam(new Course("3AI"),"Tognini");
         e.setSubject("Chimica");
         e.addStudent("Piero");
         e.addStudent("Geppo");
         e.addStudent("Plino");
         e.addStudent("Anna");
         s.addExam(e);
-        Exam second = new Exam(new Course("3AI"));
+        Exam second = new Exam(new Course("3AI"),"Bugatti");
         second.setSubject("Geografia");
         second.addStudent("Girbo");
         second.addStudent("Gianna");
@@ -115,14 +115,14 @@ public class SessionTest {
     public void testAddExamStudentsInCommon() {
         System.out.println("addExam students in common");
         Session s = new Session(2);
-        Exam e = new Exam(new Course("3AI"));
+        Exam e = new Exam(new Course("3AI"),"Tognini");
         e.setSubject("Chimica");
         e.addStudent("Piero");
         e.addStudent("Geppo");
         e.addStudent("Plino");
         e.addStudent("Anna");
         s.addExam(e);
-        Exam second = new Exam(new Course("3AI"));
+        Exam second = new Exam(new Course("3AI"), "Bugatti");
         second.setSubject("Lettere");
         second.addStudent("Piero");
         second.addStudent("Oldo");
@@ -141,19 +141,19 @@ public class SessionTest {
     public void testAddExamTooMany() {
         System.out.println("addExam too many exam");
         Session s = new Session(2);
-        Exam e = new Exam(new Course("3AI"));
+        Exam e = new Exam(new Course("3AI"),"Tognini");
         e.setSubject("Chimica");
         e.addStudent("Piero");
         e.addStudent("Geppo");
         e.addStudent("Plino");
         e.addStudent("Anna");
         s.addExam(e);
-        Exam second = new Exam(new Course("4AI"));
+        Exam second = new Exam(new Course("4AI"),"Bugatti");
         second.setSubject("Chimica");
         second.addStudent("Plino");
         second.addStudent("Anna");
         s.addExam(second);
-        Exam third = new Exam(new Course("5AI"));
+        Exam third = new Exam(new Course("5AI"),"Bormioli");
         e.setSubject("Second");
         third.addStudent("Plino");
         third.addStudent("Anna");
