@@ -83,6 +83,10 @@ public class Session {
         return true;
         
     }
+
+    public ArrayList<Classroom> getClassrooms() {
+        return classrooms;
+    }
     
     @Override
     public String toString(){
