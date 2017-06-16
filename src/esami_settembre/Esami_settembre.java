@@ -29,7 +29,7 @@ public class Esami_settembre {
     private static ArrayList <Course> classes;
     private static int NUMBER_OF_DAYS = 7;
     private static int NUMBER_OF_SESSIONS = 6;
-    private static int MAX_EXAMS_IN_SESSION = 10;
+    private static int MAX_CLASSROMS_IN_SESSION = 10;
     private static Map<String, ArrayList<String[]> > importedData;
     
     /*
