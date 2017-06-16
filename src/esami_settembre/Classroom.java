@@ -46,6 +46,9 @@ public class Classroom {
         for (Exam e: exams)
             if (!e.isCompatible(insertingExam))
                 return false;
+        for (Exam e: exams)
+            if (!e.getTeacher().equals(insertingExam.getTeacher()))
+                return false;
         exams.add(insertingExam);
         students_in_classroom += insertingExam.getStudents().size();
         return true;
