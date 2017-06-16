@@ -31,7 +31,7 @@ import java.util.Collections;
 import java.util.Random;
 
 
-public class Course {
+public class Course implements Comparable<Course>{
     private String name;
     ArrayList <Exam> exams;
     private final int studentNumber;
@@ -123,6 +123,11 @@ public class Course {
             e.addStudent(student);
             exams.add(e);
         }
+    }
+    
+    @Override
+    public int compareTo(Course c){
+        return name.compareTo(c.name);
     }
             
 }
