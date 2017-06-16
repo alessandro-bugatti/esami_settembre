@@ -42,6 +42,14 @@ public class Day {
         this.maxSessions = maxSessions;
     }
 
+    public String getDateAsString() {
+        SimpleDateFormat fmt = new SimpleDateFormat("dd-MM-yyyy");
+        fmt.setCalendar(date);
+        return fmt.format(date.getTime());
+    }
+    
+    
+    
     public void setDate(GregorianCalendar myDate) {
         this.date = (GregorianCalendar)myDate.clone();
     }
@@ -67,9 +75,8 @@ public class Day {
     
     @Override
     public String toString(){
-        SimpleDateFormat fmt = new SimpleDateFormat("dd-MM-yyyy");
-        fmt.setCalendar(date);
-        String s = "Data: " + fmt.format(date.getTime()) + "\nSessioni in questa giornata: " + sessions.size();
+        
+        String s = "Data: " + getDateAsString() + "\nSessioni in questa giornata: " + sessions.size();
         s += "\n";
         for (int i=0 ; i < sessions.size(); i++)
             s += "\nSessione " + (i+1)  + "\n" + sessions.get(i);
