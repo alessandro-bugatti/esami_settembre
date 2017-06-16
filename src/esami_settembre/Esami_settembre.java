@@ -111,7 +111,7 @@ public class Esami_settembre {
     public static void main(String[] args) {
         Esami_settembre.days = new Day[NUMBER_OF_DAYS];
         importedData = new HashMap<>();
-        GregorianCalendar c = new GregorianCalendar(2017, Calendar.AUGUST, 29);
+        GregorianCalendar c = new GregorianCalendar(2017, Calendar.AUGUST, 28);
         for (int i = 0; i < NUMBER_OF_DAYS; i++){
             days[i] = new Day(NUMBER_OF_SESSIONS);
             days[i].setDate(c);

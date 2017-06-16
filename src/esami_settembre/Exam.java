@@ -94,6 +94,7 @@ public class Exam {
     @Override
     public String toString(){
         String r = "\nClasse: " + name.getName() + "\nMateria: " + this.subject;
+        r += "\nDocente: " + teacher;
         r += "\nStudenti: " +  students.toString();
         return r;
     }

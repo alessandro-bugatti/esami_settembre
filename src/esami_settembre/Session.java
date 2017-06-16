@@ -30,28 +30,37 @@ import java.util.ArrayList;
 
 
 public class Session {
-    private ArrayList <Exam> exams;
-    private final int max_exams_in_session;
+    private final ArrayList <Classroom> classrooms;
+    private final int max_classrooms_in_session;
 
-    public Session(int max_exams_in_session) {
-        exams = new ArrayList<>();
-        this.max_exams_in_session = max_exams_in_session;
+    public Session(int max_classrooms_in_session) {
+        classrooms = new ArrayList<>();
+        this.max_classrooms_in_session = max_classrooms_in_session;
     }
     
     public boolean addExam(Exam insertingExam){
-        if (exams.size() >= max_exams_in_session)
+        for (Classroom c: classrooms)
+            if (c.canContainAnotherExam(insertingExam))
+            {
+                c.addExam(insertingExam);
+                return true;
+            }
+        if (classrooms.size() >= max_classrooms_in_session)
             return false;
-        for (Exam e: exams)
-            if (!e.isCompatible(insertingExam))
+        for (Classroom c: classrooms)
+            if (!c.isCompatible(insertingExam))
                 return false;
-        exams.add(insertingExam);
+        
+        Classroom newClassroom = new Classroom(25);
+        newClassroom.addExam(insertingExam);
+        classrooms.add(newClassroom);
         return true;
         
     }
     
     @Override
     public String toString(){
-        return "\nEsami in questa sessione: " + exams.toString();
+        return "\nEsami in questa sessione: " + classrooms.toString();
     }
     
 }

@@ -47,7 +47,35 @@ public class Classroom {
             if (!e.isCompatible(insertingExam))
                 return false;
         exams.add(insertingExam);
+        students_in_classroom += insertingExam.getStudents().size();
         return true;
     }
+    
+    public boolean isCompatible(Exam insertingExam){
+        for (Exam e : exams){
+            if(!e.isCompatible(insertingExam))
+                return false;
+        }
+        return true;
+    }
+    
+    public boolean canContainAnotherExam(Exam insertingExam){
+        for (Exam e : exams){
+            if (e.getTeacher().equals(insertingExam.getTeacher()) &&
+                    students_in_classroom + insertingExam.getStudents().size() <= max_student_in_classroom)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "\n\nStudenti nella classe = " + students_in_classroom +  
+                 " classi in contemporanea = " + exams.size() + "\n"+ exams;
+    }
+    
+    
     
 }
