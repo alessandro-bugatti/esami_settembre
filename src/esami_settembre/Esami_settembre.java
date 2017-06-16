@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +28,7 @@ public class Esami_settembre {
 
     private static Day days[];
     private static ArrayList <Course> classes;
-    private static int NUMBER_OF_DAYS = 7;
+    private static int NUMBER_OF_DAYS = 4;
     private static int NUMBER_OF_SESSIONS = 6;
     private static int MAX_CLASSROMS_IN_SESSION = 10;
     private static Map<String, ArrayList<String[]> > importedData;
@@ -104,6 +105,70 @@ public class Esami_settembre {
         }
         
     }
+    
+    private static void writeHumanReadaleFile(String filename)
+    {
+        BufferedWriter bufOut = null;
+            try {
+                bufOut = new BufferedWriter(new FileWriter(filename  + ".txt"));
+            } catch (IOException ex) {
+                Logger.getLogger(Esami_settembre.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            for (Day d: days){
+                try {
+                    bufOut.write(d.toString());
+                    bufOut.write("\n");
+                } catch (IOException ex) {
+                    Logger.getLogger(Esami_settembre.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            try {
+                bufOut.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Esami_settembre.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }   
+    
+    private static void writeCSVFile(String filename)
+    {
+        BufferedWriter bufOut = null;
+            try {
+                bufOut = new BufferedWriter(new FileWriter(filename  + ".csv"));
+            } catch (IOException ex) {
+                Logger.getLogger(Esami_settembre.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            int number = 1;
+            for (Day d: days){
+                try {
+                    bufOut.write("Giornata " + number + ";" + d.getDateAsString() + ";;;;;;;;");
+                    int session_number = 1;
+                    for (Session s: d.getSessions()){
+                        bufOut.write("\nSessione " + session_number + ";;;;;;;;;");
+                        bufOut.write("\nClasse 1");
+                        for (int i = 2; i <= MAX_CLASSROMS_IN_SESSION; i++)
+                        {
+                            bufOut.write(";Classe " + i);
+                        }
+                        bufOut.write("\n");
+                        for (Classroom c: s.getClassrooms())
+                        {
+                            bufOut.write(c.toCSV()+";");
+                        }
+                        bufOut.write("\n");
+                        session_number++;
+                    }
+                    bufOut.write("\n\n");
+                    number++;
+                } catch (IOException ex) {
+                    Logger.getLogger(Esami_settembre.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            try {
+                bufOut.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Esami_settembre.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
     /**
      * @param args the command line arguments
      */
@@ -119,7 +184,7 @@ public class Esami_settembre {
             if (c.get(Calendar.DAY_OF_WEEK_IN_MONTH) == 1)
                 c.add(Calendar.DAY_OF_MONTH, 1);
             for (int j = 0; j < NUMBER_OF_SESSIONS; j++)
-                days[i].addSession(new Session(MAX_EXAMS_IN_SESSION));
+                days[i].addSession(new Session(MAX_CLASSROMS_IN_SESSION));
             //System.out.println(d);
         }
         //System.out.println(days[0].getSession(0));
@@ -132,25 +197,10 @@ public class Esami_settembre {
 
         
         createCalendar();
-        BufferedWriter bufOut = null;
-        try {
-            bufOut = new BufferedWriter(new FileWriter("output.txt"));
-        } catch (IOException ex) {
-            Logger.getLogger(Esami_settembre.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        for (Day d: days){
-            try {
-                bufOut.write(d.toString());
-                bufOut.write("\n");
-            } catch (IOException ex) {
-                Logger.getLogger(Esami_settembre.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        try {
-            bufOut.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Esami_settembre.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        writeHumanReadaleFile("output");
+        writeCSVFile("output");
+        
+        
         for (Day d: days){
             System.out.println(d);
         }
