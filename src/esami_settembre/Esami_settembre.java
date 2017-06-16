@@ -43,6 +43,7 @@ public class Esami_settembre {
     
     
     private static void createCalendar(){
+        Collections.sort(Esami_settembre.classes);
         for (Course i: Esami_settembre.classes)
         {
             int currentExam = 0;
