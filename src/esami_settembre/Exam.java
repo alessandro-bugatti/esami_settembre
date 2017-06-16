@@ -91,6 +91,12 @@ public class Exam {
         return !l.removeAll(e.getStudents());
     }
     
+    public String toCSV(){
+        return name.getName()
+                //+ " " + this.subject 
+                + " " + this.teacher;
+    }
+    
     @Override
     public String toString(){
         String r = "\nClasse: " + name.getName() + "\nMateria: " + this.subject;
