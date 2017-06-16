@@ -72,7 +72,15 @@ public class Classroom {
         }
         return false;
     }
-
+    
+    public String toCSV()
+    {
+        String s = "Studenti: " + students_in_classroom + " classi: " + exams.size() + "  ";
+        for (Exam e : exams)
+            s += " - " + e.toCSV();
+        return s;
+    }
+    
     @Override
     public String toString() {
         return "\n\nStudenti nella classe = " + students_in_classroom +  
