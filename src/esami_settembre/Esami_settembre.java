@@ -51,8 +51,6 @@ public class Esami_settembre {
                 int session = 0;
                 while(!i.getExam(currentExam).isAccomodated() && day < NUMBER_OF_DAYS)
                 {
-                    //System.out.println("Day: " + day + " session: " + session);
-                    Session s = days[day].getSession(session);
                     if (days[day].getSession(session).addExam(i.getExam(currentExam)))
                         i.getExam(currentExam).accomodate();
                     else{
