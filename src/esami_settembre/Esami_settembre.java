@@ -28,7 +28,7 @@ public class Esami_settembre {
 
     private static Day days[];
     private static ArrayList <Course> classes;
-    private static int NUMBER_OF_DAYS = 4;
+    private static int NUMBER_OF_DAYS = 6;
     private static int NUMBER_OF_SESSIONS = 6;
     private static int MAX_CLASSROMS_IN_SESSION = 10;
     private static Map<String, ArrayList<String[]> > importedData;
@@ -43,21 +43,47 @@ public class Esami_settembre {
     }*/
     
     
+    private static boolean checkStudentsInDay(HashMap<String, Integer> list, ArrayList<String> students){
+        for (String s: students)
+            if (list.containsKey(s) && list.get(s) >= 2)
+                return false;
+        return true;
+    }
+    
+    private static void addStudentsInDay(HashMap<String, Integer> list, ArrayList<String> students){
+        for (String s: students)
+            if (list.containsKey(s))
+                list.put(s,list.get(s)+1);
+            else
+                list.put(s, 1);
+    }
+    
     private static void createCalendar(){
         Collections.sort(Esami_settembre.classes);
         for (Course i: Esami_settembre.classes)
         {
             int currentExam = 0;
+            ArrayList<HashMap<String, Integer>> studentsInDay = new ArrayList<>();
+            for (int j = 0; j < NUMBER_OF_DAYS; j++)
+                studentsInDay.add(new HashMap<>());
             while (currentExam < i.getNumberOfExams()){
                 int day = 0;
                 int session = 0;
                 while(!i.getExam(currentExam).isAccomodated() && day < NUMBER_OF_DAYS)
                 {
-                    if (days[day].getSession(session).addExam(i.getExam(currentExam)))
+                    if (checkStudentsInDay(studentsInDay.get(day), i.getExam(currentExam).getStudents())
+                    && days[day].getSession(session).addExam(i.getExam(currentExam))){
+                        addStudentsInDay(studentsInDay.get(day), i.getExam(currentExam).getStudents());
                         i.getExam(currentExam).accomodate();
+                    }
                     else{
                         session++;
-                        if (session == NUMBER_OF_SESSIONS)
+                        if (checkStudentsInDay(studentsInDay.get(day), i.getExam(currentExam).getStudents()) == false)
+                        {
+                            session = 0;
+                            day++;
+                        }
+                        else if (session == NUMBER_OF_SESSIONS)
                         {
                             session = 0;
                             day++;
