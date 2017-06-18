@@ -47,6 +47,10 @@ public class Course implements Comparable<Course>{
         return name;
     }
     
+    public String getShortName() {
+        return name.substring(0, 7);
+    }
+    
     /*
     public void createExams(int n){
         Random r = new Random();
