@@ -92,9 +92,14 @@ public class Exam {
     }
     
     public String toCSV(){
-        return ">> " + name.getShortName()
-                + " (" + this.subject.substring(0, 5) + "...)"
-                + " - " + this.teacher;
+        String s =  ">> " + name.getShortName()
+                + " (";
+        if (this.subject.length()>=5) 
+            s += this.subject.substring(0, 5);
+        else
+            s += this.subject.substring(0,this.subject.length());
+        s += "...)" + " - " + this.teacher;
+        return s;
     }
     
     @Override

@@ -28,9 +28,9 @@ public class Esami_settembre {
 
     private static Day days[];
     private static ArrayList <Course> classes;
-    private static int NUMBER_OF_DAYS = 6;
-    private static int NUMBER_OF_SESSIONS = 6;
-    private static int MAX_CLASSROMS_IN_SESSION = 10;
+    private static int NUMBER_OF_DAYS = 10;
+    private static int NUMBER_OF_SESSIONS = 4;
+    private static int MAX_CLASSROMS_IN_SESSION = 15;
     private static Map<String, ArrayList<String[]> > importedData;
     
     /*
@@ -170,10 +170,10 @@ public class Esami_settembre {
                     int session_number = 1;
                     for (Session s: d.getSessions()){
                         bufOut.write("\nSessione " + session_number + ";;;;;;;;;");
-                        bufOut.write("\nClasse 1");
+                        bufOut.write("\nAula 1");
                         for (int i = 2; i <= MAX_CLASSROMS_IN_SESSION; i++)
                         {
-                            bufOut.write(";Classe " + i);
+                            bufOut.write(";Aula " + i);
                         }
                         bufOut.write("\n");
                         for (Classroom c: s.getClassrooms())
@@ -216,15 +216,15 @@ public class Esami_settembre {
         //System.out.println(days[0].getSession(0));
         classes = new ArrayList<>();
         try {
-            loadData("prove2016completo.csv");
+            loadData("esami2017.csv");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Esami_settembre.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         
         createCalendar();
-        writeHumanReadaleFile("output");
-        writeCSVFile("output");
+        writeHumanReadaleFile("output2017");
+        writeCSVFile("output2017");
         
         
         for (Day d: days){
